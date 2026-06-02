@@ -52,7 +52,7 @@
 
   <h1>續約到期日查詢器</h1>
 
-  <label for="expiryDate">請輸入續約到期日：</label>
+  <label for="expiryDate">請輸入出口通到期日：</label>
   <input type="date" id="expiryDate" />
 
   <button onclick="calculateReminderDate()">計算提醒日期</button>
@@ -88,8 +88,8 @@
         return `${y}/${m}/${d}`;
       };
 
-      const resultText = `到期日：${formatDate(expiryDate)}<br>
-                         提醒日期（提前 180 天）：${formatDate(reminderDate)}`;
+      const resultText = `出口通到期日：${formatDate(expiryDate)}<br>
+                         合約可下單日期：${formatDate(reminderDate)}`;
 
       const resultDiv = document.getElementById('result');
       resultDiv.innerHTML = resultText;
