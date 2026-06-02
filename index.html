@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>續約到期日查詢器</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 600px;
+      margin: 50px auto;
+      padding: 20px;
+      background-color: #f9f9f9;
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    label {
+      display: block;
+      margin-top: 20px;
+      font-weight: bold;
+    }
+    input[type="date"] {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      box-sizing: border-box;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    #result {
+      margin-top: 20px;
+      padding: 15px;
+      background-color: #e9f7ef;
+      border-left: 4px solid #4CAF50;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>續約到期日查詢器</h1>
+
+  <label for="expiryDate">請輸入續約到期日：</label>
+  <input type="date" id="expiryDate" />
+
+  <button onclick="calculateReminderDate()">計算提醒日期</button>
+
+  <div id="result"></div>
+
+  <script>
+    function calculateReminderDate() {
+      const input = document.getElementById('expiryDate').value;
+      if (!input) {
+        alert('請選擇一個日期！');
+        return;
+      }
+
+      // 將輸入的字串轉為 Date 物件
+      const expiryDate = new Date(input);
+
+      // 檢查是否為有效日期
+      if (isNaN(expiryDate.getTime())) {
+        alert('日期格式錯誤！');
+        return;
+      }
+
+      // 計算提前 180 天的日期
+      const reminderDate = new Date(expiryDate);
+      reminderDate.setDate(expiryDate.getDate() - 180);
+
+      // 格式化日期為 YYYY/MM/DD
+      const formatDate = (date) => {
+        const y = date.getFullYear();
+        const m = String(date.getMonth() + 1).padStart(2, '0'); // 月份從 0 開始
+        const d = String(date.getDate()).padStart(2, '0');
+        return `${y}/${m}/${d}`;
+      };
+
+      const resultText = `到期日：${formatDate(expiryDate)}<br>
+                         提醒日期（提前 180 天）：${formatDate(reminderDate)}`;
+
+      const resultDiv = document.getElementById('result');
+      resultDiv.innerHTML = resultText;
+      resultDiv.style.display = 'block';
+    }
+  </script>
+
+</body>
+</html>
