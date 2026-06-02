@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>續約到期日查詢器</title>
+  <title>續約客戶可下單日查詢器</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -88,8 +88,7 @@
         return `${y}/${m}/${d}`;
       };
 
-      const resultText = `出口通到期日：${formatDate(expiryDate)}<br>
-                         合約可下單日期：${formatDate(reminderDate)}`;
+  const resultText = `合約可下單日：${formatDate(reminderDate)}`;
 
       const resultDiv = document.getElementById('result');
       resultDiv.innerHTML = resultText;
